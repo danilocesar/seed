@@ -442,6 +442,19 @@ seed_gi_importer_do_namespace(JSContextRef ctx,
         return namespace_ref;
     }
 
+    // Handle modules blocking here
+    GList* blocked = eng->blocked_modules;
+    while (blocked != NULL) {
+        GList* next = blocked->next;
+        if (g_strcmp0(namespace, blocked->data) == 0) {
+            seed_make_exception(
+              ctx, exception, "PermissionError",
+              "You don't have permission to include module %s", namespace);
+            return NULL;
+        }
+        blocked = next;
+    }
+
     if (gi_importer_versions != NULL)
         version = seed_gi_importer_get_version(ctx, namespace, exception);
     if (!g_irepository_require(NULL, namespace, version, 0, &e)) {

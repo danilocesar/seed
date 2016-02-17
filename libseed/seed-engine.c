@@ -1669,6 +1669,8 @@ seed_engine_destroy(SeedEngine* eng)
     JSGlobalContextRelease(eng->context);
     JSContextGroupRelease(eng->group);
 
+    g_list_free_full(eng->blocked_modules, g_free);
+
     g_free(eng);
 }
 
@@ -1733,6 +1735,7 @@ seed_init_constrained_with_context_and_group(gint* argc,
     eng->global = JSContextGetGlobalObject(eng->context);
     eng->group = context_group;
     eng->search_path = NULL;
+    eng->blocked_modules = NULL;
 
     function_proto
       = (JSObjectRef) seed_simple_evaluate(eng->context, "Function.prototype",
@@ -1917,6 +1920,24 @@ seed_init_constrained(gint* argc, gchar*** argv)
     return seed_init_constrained_with_context_and_group(
       argc, argv, JSGlobalContextCreateInGroup(context_group, NULL),
       context_group);
+}
+
+/*
+ * seed_engine_block_module:
+ * @engine: The #SeedEngine
+ * @module_name: Name of the module to block access to
+ *
+ * Blocking certain GI modules from beein imported.
+ *
+ * return: TRUE if the operation worked, false if it didn't
+ */
+gboolean
+seed_engine_block_module(SeedEngine* engine, gchar* module_name)
+{
+    engine->blocked_modules
+      = g_list_append(engine->blocked_modules, module_name);
+
+    return TRUE;
 }
 
 /*

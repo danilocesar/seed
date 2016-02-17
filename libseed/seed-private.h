@@ -41,6 +41,7 @@ struct _SeedEngine
     gchar** search_path;
 
     JSContextGroupRef group;
+    GList* blocked_modules;
 };
 
 #include "seed-debug.h"

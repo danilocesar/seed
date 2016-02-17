@@ -113,6 +113,7 @@ guint seed_exception_get_line(SeedContext ctx, SeedException exception);
 gchar* seed_exception_get_file(SeedContext ctx, SeedException exception);
 gchar* seed_exception_get_stack(SeedContext ctx, SeedException exception);
 gchar* seed_exception_to_string(SeedContext ctx, SeedException exception);
+gboolean seed_engine_block_module(SeedEngine* engine, gchar* module_name);
 
 SeedValue seed_evaluate(SeedContext ctx, SeedScript* s, SeedObject this_object);
 
