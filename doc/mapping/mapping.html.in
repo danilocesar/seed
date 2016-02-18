@@ -57,7 +57,7 @@ As an example,
 w = new <namespace>Gtk</namespace>.<type>Window</type>({title: "Hello"});
 c = new <namespace>Clutter</namespace>.<type>Texture</type>({width: 300, height:300});
 </pre>
-All other properties are left to their default values. Note, <code><namespace>Gtk</namespace>.<type>Window</type>.<member>prototype</member></code> is the prototype of all <code><namespace>Gtk</namespace>.<type>Window</type></code> instances. It is also possible for objects to have "named" constructors which take specific arguments, i.e. for <code><namespace>clutter</namespace>_<type>texture</type>_new_<member>from_file</member</code> we have
+All other properties are left to their default values. Note, <code><namespace>Gtk</namespace>.<type>Window</type>.<member>prototype</member></code> is the prototype of all <code><namespace>Gtk</namespace>.<type>Window</type></code> instances. It is also possible for objects to have "named" constructors which take specific arguments, i.e. for <code><namespace>clutter</namespace>_<type>texture</type>_new_<member>from_file</member></code> we have
 <pre class="javascript">t = new <namespace>Clutter</namespace>.<type>Texture</type>.<member>from_file</member>("/tmp/cat.png");</pre>
 
 In addition <code><namespace>gtk</namespace>_<type>window</type>_<member>new</member></code> maps to <code><namespace>Gtk</namespace>.<type>Window</type>.<member>c_new</member></code> (because <code>new</code> is a JavaScript keyword). This however is rarely used.
